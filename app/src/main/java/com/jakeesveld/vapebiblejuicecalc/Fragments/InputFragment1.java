@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 
+import com.jakeesveld.vapebiblejuicecalc.Activities.ResultsActivity;
 import com.jakeesveld.vapebiblejuicecalc.Models.Base;
 import com.jakeesveld.vapebiblejuicecalc.Models.Recipe;
 import com.jakeesveld.vapebiblejuicecalc.R;
@@ -31,6 +32,7 @@ import com.jakeesveld.vapebiblejuicecalc.R;
  */
 public class InputFragment1 extends Fragment {
 
+    public static final int FRAGMENT_REQUEST_CODE = 10;
     EditText editBottleSize, editDesiredStrength, editDesiredPG, editDesiredVG, editBaseStrength, editBaseVG, editBasePG;
     SeekBar desiredRatioSeekbar, baseRatioSeekbar;
     Recipe newRecipe;
@@ -140,6 +142,15 @@ public class InputFragment1 extends Fragment {
                         newRecipe.setNic(Integer.parseInt(editDesiredStrength.getText().toString()));
                         newRecipe.setPG(Integer.parseInt(editDesiredPG.getText().toString().replace("%", "")));
                         newRecipe.setVG(Integer.parseInt(editDesiredVG.getText().toString().replace("%", "")));
+                        Fragment inputFragment2 = new InputFragment2();
+                        Bundle args = new Bundle();
+                        args.putSerializable(ResultsActivity.RECIPE_KEY, newRecipe);
+                        inputFragment2.setArguments(args);
+                        if(getFragmentManager() != null){
+                            getFragmentManager().beginTransaction().replace(R.id.container, inputFragment2)
+                            .addToBackStack(null).commit();
+
+                        }
                     }catch (Exception e){
                         Snackbar.make(view, "Invalid input(s)", Snackbar.LENGTH_LONG).show();
                     }

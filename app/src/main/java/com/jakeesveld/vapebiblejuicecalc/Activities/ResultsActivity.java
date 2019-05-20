@@ -7,9 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.jakeesveld.vapebiblejuicecalc.Fragments.InputFragment1;
+import com.jakeesveld.vapebiblejuicecalc.Fragments.InputFragment2;
 import com.jakeesveld.vapebiblejuicecalc.R;
 
-public class ResultsActivity extends BaseActivity implements InputFragment1.OnFragmentInteractionListener {
+public class ResultsActivity extends BaseActivity implements InputFragment1.OnFragmentInteractionListener, InputFragment2.OnFragmentInteractionListener {
+
+    public static final String RECIPE_KEY = "Recipe";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,8 +1,9 @@
 package com.jakeesveld.vapebiblejuicecalc.Models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Recipe {
+public class Recipe implements Serializable {
     private int PG, VG, nic;
     private String name;
     private ArrayList<Flavor> flavors;
