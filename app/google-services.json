@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "564315759515",
+    "firebase_url": "https://vape-bible-juice-calc.firebaseio.com",
+    "project_id": "vape-bible-juice-calc",
+    "storage_bucket": "vape-bible-juice-calc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564315759515:android:8634b45b3c817e47",
+        "android_client_info": {
+          "package_name": "com.jakeesveld.vapebiblejuicecalc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564315759515-9m360tlkmd6ksbetvklaap37hpm7upi6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDV2Staek-RGs4ea2FXtdmtbod69dzvMsc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "564315759515-9m360tlkmd6ksbetvklaap37hpm7upi6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
