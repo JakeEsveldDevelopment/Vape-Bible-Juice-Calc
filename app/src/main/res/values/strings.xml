@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Vape Bible Juice Calc</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="create_new_recipe">Create New Recipe</string>
+    <string name="how_to_help">How To/Help</string>
+    <string name="log_in_register">Log in/ Register</string>
+    <string name="my_saved_recipes">My Saved Recipes</string>
+    <string name="example_recipes">Example Recipes</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_main_menu" android:title="@string/main_menu"/>
+    <item android:id="@+id/nav_create_new" android:title="@string/create_new_recipe"/>
+    <item android:id="@+id/nav_help" android:title="@string/how_to_help"/>
+    <item android:id="@+id/nav_login" android:title="@string/log_in_register"/>
+    <item android:id="@+id/nav_saved_recipes" android:title="@string/my_saved_recipes"/>
+    <item android:id="@+id/nav_example_recipes" android:title="@string/example_recipes"/>
+</menu>
