@@ -1,6 +1,8 @@
 package com.jakeesveld.vapebiblejuicecalc.Models;
 
-public class Base {
+import java.io.Serializable;
+
+public class Base implements Serializable {
     private int VG, PG, strength;
 
     public Base(int VG, int PG, int strength) {

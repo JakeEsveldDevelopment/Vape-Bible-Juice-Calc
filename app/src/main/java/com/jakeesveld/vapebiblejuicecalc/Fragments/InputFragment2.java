@@ -1,11 +1,13 @@
 package com.jakeesveld.vapebiblejuicecalc.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.renderscript.ScriptGroup;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.view.Gravity;
@@ -16,7 +18,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.jakeesveld.vapebiblejuicecalc.Activities.ResultsActivity;
+import com.jakeesveld.vapebiblejuicecalc.Models.Flavor;
+import com.jakeesveld.vapebiblejuicecalc.Models.Recipe;
 import com.jakeesveld.vapebiblejuicecalc.R;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,7 +37,9 @@ import com.jakeesveld.vapebiblejuicecalc.R;
 public class InputFragment2 extends Fragment {
 
     LinearLayout layoutFlavorName, layoutFlavorPercentage;
-    Button buttonAddFlavor;
+    Button buttonAddFlavor, buttonResults;
+    ArrayList<Flavor> flavors;
+    Recipe recipe;
 
 
     private OnFragmentInteractionListener mListener;
@@ -57,6 +67,7 @@ public class InputFragment2 extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            recipe = (Recipe) getArguments().getSerializable(ResultsActivity.RECIPE_KEY);
         }
     }
 
@@ -73,6 +84,8 @@ public class InputFragment2 extends Fragment {
         layoutFlavorName = view.findViewById(R.id.layout_flavor_names);
         layoutFlavorPercentage = view.findViewById(R.id.layout_flavor_percentages);
         buttonAddFlavor = view.findViewById(R.id.button_add_flavor);
+        buttonResults = view.findViewById(R.id.button_results);
+        flavors = new ArrayList<>();
 
         buttonAddFlavor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,10 +94,25 @@ public class InputFragment2 extends Fragment {
             }
         });
 
+        buttonResults.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (makeFlavorArray()) {
+                    recipe.setFlavors(flavors);
+                    Intent intent = new Intent(getActivity(), ResultsActivity.class);
+                    intent.putExtra(ResultsActivity.RECIPE_KEY, recipe);
+                    startActivity(intent);
+                } else {
+                    Snackbar.make(getView(),
+                            "Please make sure all flavors are filled out correctly before continuing",
+                            Snackbar.LENGTH_LONG).show();
+                }
+            }
+        });
 
     }
 
-    public void addFlavor(){
+    public void addFlavor() {
         EditText flavorName = new EditText(getContext());
         EditText flavorPercentage = new EditText(getContext());
         flavorName.setHint("Flavor Name");
@@ -94,6 +122,37 @@ public class InputFragment2 extends Fragment {
 
         layoutFlavorName.addView(flavorName);
         layoutFlavorPercentage.addView(flavorPercentage);
+    }
+
+    public boolean makeFlavorArray() {
+        try {
+            ArrayList<String> flavorNames = new ArrayList<>();
+            ArrayList<Float> flavorPercentages = new ArrayList<>();
+            for (int i = 0; i < layoutFlavorName.getChildCount(); ++i) {
+                View flavorNameView = layoutFlavorName.getChildAt(i);
+                if (flavorNameView instanceof EditText) {
+                    if (!((EditText) flavorNameView).getText().toString().equals("")) {
+                        String flavorName = ((EditText) flavorNameView).getText().toString();
+                        flavorNames.add(flavorName);
+                    }
+                }
+                View flavorPercentageView = layoutFlavorPercentage.getChildAt(i);
+                if (flavorPercentageView instanceof EditText) {
+                    if (!((EditText) flavorPercentageView).getText().toString().equals("")) {
+                        Float flavorPercentage = Float.parseFloat(((EditText) flavorPercentageView).getText().toString());
+                        flavorPercentages.add(flavorPercentage);
+                    }
+                }
+            }
+            for (int i = 0; i < flavorNames.size(); ++i) {
+                Flavor flavor = new Flavor(flavorNames.get(i), flavorPercentages.get(i));
+                flavors.add(flavor);
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

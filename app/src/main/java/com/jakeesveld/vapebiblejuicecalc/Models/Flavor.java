@@ -1,6 +1,8 @@
 package com.jakeesveld.vapebiblejuicecalc.Models;
 
-public class Flavor {
+import java.io.Serializable;
+
+public class Flavor implements Serializable {
     private String name;
     private float amount;
 
