@@ -1,13 +1,24 @@
 package com.jakeesveld.vapebiblejuicecalc.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.SeekBar;
 
+import com.jakeesveld.vapebiblejuicecalc.Models.Base;
+import com.jakeesveld.vapebiblejuicecalc.Models.Recipe;
 import com.jakeesveld.vapebiblejuicecalc.R;
 
 /**
@@ -19,6 +30,11 @@ import com.jakeesveld.vapebiblejuicecalc.R;
  * create an instance of this fragment.
  */
 public class InputFragment1 extends Fragment {
+
+    EditText editBottleSize, editDesiredStrength, editDesiredPG, editDesiredVG, editBaseStrength, editBaseVG, editBasePG;
+    SeekBar desiredRatioSeekbar, baseRatioSeekbar;
+    Recipe newRecipe;
+    Button buttonNextPage;
 
 
     private OnFragmentInteractionListener mListener;
@@ -53,8 +69,83 @@ public class InputFragment1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_input_fragment1, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        editBottleSize = view.findViewById(R.id.edit_bottle_size);
+        editDesiredStrength = view.findViewById(R.id.edit_desired_strength);
+        editDesiredPG = view.findViewById(R.id.edit_desired_PG);
+        editDesiredVG = view.findViewById(R.id.edit_desired_VG);
+        editBaseStrength = view.findViewById(R.id.edit_base_strength);
+        editBaseVG = view.findViewById(R.id.edit_base_VG);
+        editBasePG  = view.findViewById(R.id.edit_base_PG);
+        desiredRatioSeekbar = view.findViewById(R.id.seekbar_desired_ratio);
+        baseRatioSeekbar = view.findViewById(R.id.seekbar_base_ratio);
+        buttonNextPage = view.findViewById(R.id.button_next_page);
+        newRecipe = new Recipe();
+
+        desiredRatioSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                editDesiredVG.setText(String.valueOf(progress) + "%");
+                editDesiredPG.setText(String.valueOf(100 - progress) + "%");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        baseRatioSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                editBaseVG.setText(String.valueOf(progress) + "%");
+                editBasePG.setText(String.valueOf(100 - progress) + "%");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        buttonNextPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(editBottleSize.getText().toString().equals("")||
+                        editDesiredStrength.getText().toString().equals("") ||
+                        editBaseStrength.getText().toString().equals("")){
+                    Snackbar.make(view, "Please fill out all fields to continue", Snackbar.LENGTH_LONG).show();
+                }else{
+                    try{
+                        int baseVG = Integer.parseInt(editBaseVG.getText().toString().replace("%", ""));
+                        int basePG = Integer.parseInt(editBasePG.getText().toString().replace("%", ""));
+                        int baseStrength = Integer.parseInt(editBaseStrength.getText().toString());
+                        Base newRecipeBase = new Base(baseVG, basePG, baseStrength);
+                        newRecipe.setBaseNic(newRecipeBase);
+                        newRecipe.setNic(Integer.parseInt(editDesiredStrength.getText().toString()));
+                        newRecipe.setPG(Integer.parseInt(editDesiredPG.getText().toString().replace("%", "")));
+                        newRecipe.setVG(Integer.parseInt(editDesiredVG.getText().toString().replace("%", "")));
+                    }catch (Exception e){
+                        Snackbar.make(view, "Invalid input(s)", Snackbar.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
     }
 
     public void onButtonPressed(Uri uri) {
