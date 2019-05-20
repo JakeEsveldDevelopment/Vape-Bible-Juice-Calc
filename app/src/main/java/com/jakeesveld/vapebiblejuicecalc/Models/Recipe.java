@@ -20,15 +20,15 @@ public class Recipe implements Serializable {
     }
     public RecipeResult calculateResults(){
         float resultNic = (this.bottleSize * (0.01f * this.nic) / (0.01f * this.baseNic.getStrength()));
-        float resultVG = (this.VG / this.bottleSize) - (this.baseNic.getVG() * this.bottleSize);
+        float resultVG = ((this.VG * 0.01f) * this.bottleSize) - ((this.baseNic.getVG() * 0.01f) * resultNic);
         ArrayList<Float> flavorAmounts = new ArrayList<>();
         float totalFlavorAmounts = 0.0f;
         for(int i = 0; i < flavors.size(); ++i){
-            float flavorAmount = flavors.get(i).getAmount() / this.bottleSize;
+            float flavorAmount = (flavors.get(i).getAmount() * 0.01f) * this.bottleSize;
             flavorAmounts.add(flavorAmount);
             totalFlavorAmounts += flavorAmount;
         }
-        float resultPG = ((this.PG / this.bottleSize) - this.baseNic.getPG() * this.bottleSize) - totalFlavorAmounts;
+        float resultPG = (((this.PG * 0.01f) * this.bottleSize) - ((this.baseNic.getPG() * 0.01f) * resultNic)) - totalFlavorAmounts;
 
         RecipeResult result = new RecipeResult(resultVG, resultPG, resultNic, flavorAmounts);
         return result;
@@ -37,11 +37,11 @@ public class Recipe implements Serializable {
     public boolean checkCorrectPG(){
         float totalAmountPG = 0.0f;
         for(int i = 0; i < flavors.size(); ++i){
-            float flavorAmount = flavors.get(i).getAmount() / this.bottleSize;
+            float flavorAmount = (flavors.get(i).getAmount() * 0.01f) * this.bottleSize;
             totalAmountPG += flavorAmount;
         }
-        totalAmountPG += this.baseNic.getPG() / this.bottleSize;
-        if(totalAmountPG <= (this.PG / this.bottleSize)){
+        totalAmountPG += ((this.baseNic.getPG() * 0.01f) * (this.nic * 0.01f)) * this.bottleSize;
+        if(totalAmountPG <= ((this.PG * 0.01) * this.bottleSize)){
             return true;
         }else{
             return false;
@@ -95,6 +95,7 @@ public class Recipe implements Serializable {
     public ArrayList<Flavor> getFlavors() {
         return flavors;
     }
+
 
     public void setFlavors(ArrayList<Flavor> flavors) {
         this.flavors = flavors;

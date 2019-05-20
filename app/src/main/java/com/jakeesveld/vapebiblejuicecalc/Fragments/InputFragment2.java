@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -23,7 +22,6 @@ import com.jakeesveld.vapebiblejuicecalc.Models.Flavor;
 import com.jakeesveld.vapebiblejuicecalc.Models.Recipe;
 import com.jakeesveld.vapebiblejuicecalc.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -99,11 +97,12 @@ public class InputFragment2 extends Fragment {
             public void onClick(View v) {
                 if (makeFlavorArray()) {
                     recipe.setFlavors(flavors);
-                    if(recipe.checkCorrectPG()) {
+
+                    if (recipe.checkCorrectPG()) {
                         Intent intent = new Intent(getActivity(), ResultsActivity.class);
                         intent.putExtra(ResultsActivity.RECIPE_KEY, recipe);
                         startActivity(intent);
-                    }else{
+                    } else {
                         Snackbar.make(getView(),
                                 "Flavor percentage cannot be more than total PG",
                                 Snackbar.LENGTH_LONG).show();
@@ -150,6 +149,7 @@ public class InputFragment2 extends Fragment {
                     }
                 }
             }
+            flavors.clear();
             for (int i = 0; i < flavorNames.size(); ++i) {
                 Flavor flavor = new Flavor(flavorNames.get(i), flavorPercentages.get(i));
                 flavors.add(flavor);
