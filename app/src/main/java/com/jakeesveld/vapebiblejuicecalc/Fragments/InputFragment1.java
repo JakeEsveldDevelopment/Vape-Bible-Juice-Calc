@@ -139,6 +139,7 @@ public class InputFragment1 extends Fragment {
                         int baseStrength = Integer.parseInt(editBaseStrength.getText().toString());
                         Base newRecipeBase = new Base(baseVG, basePG, baseStrength);
                         newRecipe.setBaseNic(newRecipeBase);
+                        newRecipe.setBottleSize(Integer.parseInt(editBottleSize.getText().toString()));
                         newRecipe.setNic(Integer.parseInt(editDesiredStrength.getText().toString()));
                         newRecipe.setPG(Integer.parseInt(editDesiredPG.getText().toString().replace("%", "")));
                         newRecipe.setVG(Integer.parseInt(editDesiredVG.getText().toString().replace("%", "")));

@@ -99,9 +99,15 @@ public class InputFragment2 extends Fragment {
             public void onClick(View v) {
                 if (makeFlavorArray()) {
                     recipe.setFlavors(flavors);
-                    Intent intent = new Intent(getActivity(), ResultsActivity.class);
-                    intent.putExtra(ResultsActivity.RECIPE_KEY, recipe);
-                    startActivity(intent);
+                    if(recipe.checkCorrectPG()) {
+                        Intent intent = new Intent(getActivity(), ResultsActivity.class);
+                        intent.putExtra(ResultsActivity.RECIPE_KEY, recipe);
+                        startActivity(intent);
+                    }else{
+                        Snackbar.make(getView(),
+                                "Flavor percentage cannot be more than total PG",
+                                Snackbar.LENGTH_LONG).show();
+                    }
                 } else {
                     Snackbar.make(getView(),
                             "Please make sure all flavors are filled out correctly before continuing",
