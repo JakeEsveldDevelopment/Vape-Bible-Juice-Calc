@@ -1,5 +1,6 @@
 package com.jakeesveld.vapebiblejuicecalc.Activities;
 
+import android.content.Intent;
 import android.net.Uri;
 
 import androidx.fragment.app.Fragment;
@@ -76,6 +77,7 @@ public class ResultsActivity extends BaseActivity implements InputFragment1.OnFr
                                 @Override
                                 public void run() {
                                     Toast.makeText(getBaseContext(), "Recipe Saved Successfully", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(getBaseContext(), SavedRecipesActivity.class));
                                 }
                             });
                         }

@@ -37,8 +37,8 @@ public class SavedRecipeAdapter extends RecyclerView.Adapter<SavedRecipeAdapter.
         final Recipe data = dataList.get(i);
 
         viewHolder.textRecipeName.setText(data.getName());
-        viewHolder.textLastSize.setText(String.valueOf(data.getBottleSize()));
-        viewHolder.textLastStrength.setText(String.valueOf(data.getNic()));
+        viewHolder.textLastSize.setText("Last Bottle Size: " + String.valueOf(data.getBottleSize() + "mL"));
+        viewHolder.textLastStrength.setText("Last Nicotine Strength: " + String.valueOf(data.getNic()) + "mg");
 
         viewHolder.parent.setOnClickListener(new View.OnClickListener() {
             @Override

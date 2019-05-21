@@ -55,6 +55,7 @@ public class SavedRecipesActivity extends BaseActivity implements DeleteRecipeCo
                     recipeList.add(recipe);
                 }
                 listAdapter.notifyDataSetChanged();
+                checkNetworkWithLocal();
             }
 
             @Override
@@ -83,6 +84,29 @@ public class SavedRecipesActivity extends BaseActivity implements DeleteRecipeCo
         args.putSerializable(RECIPE_KEY, recipe);
         fragment.setArguments(args);
         fragment.show(getSupportFragmentManager(), DELETE_TAG);
+    }
+
+    public void checkNetworkWithLocal(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final ArrayList<Recipe> notOnNetworkRecipes = new ArrayList<>(StorageDAO.checkNetworkWithLocal(recipeList, getBaseContext()));
+
+                if(notOnNetworkRecipes.size() > 0){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            recipeList.addAll(notOnNetworkRecipes);
+                            listAdapter.notifyDataSetChanged();
+                        }
+                    });
+                    for(Recipe recipe: notOnNetworkRecipes){
+                        StorageDAO.saveRecipe(recipe, getBaseContext());
+                    }
+                }
+            }
+        }).start();
+
     }
 
 

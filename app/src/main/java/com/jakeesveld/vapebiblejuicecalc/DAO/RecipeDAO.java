@@ -10,8 +10,6 @@ import com.jakeesveld.vapebiblejuicecalc.Models.DBRecipe;
 
 import java.util.List;
 
-import static androidx.room.OnConflictStrategy.REPLACE;
-
 @Dao
 public interface RecipeDAO {
     @Query("SELECT * FROM DBRECIPE")

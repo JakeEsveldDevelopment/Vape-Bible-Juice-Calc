@@ -1,5 +1,7 @@
 package com.jakeesveld.vapebiblejuicecalc.Models;
 
+import android.content.Intent;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -8,6 +10,28 @@ public class Recipe implements Serializable {
     private String name;
     private ArrayList<Flavor> flavors;
     private Base baseNic;
+
+    public Recipe(DBRecipe dbRecipe){
+        this.PG = dbRecipe.getPG();
+        this.VG = dbRecipe.getVG();
+        this.nic = dbRecipe.getNic();
+        this.bottleSize = dbRecipe.getBottleSize();
+        this.name = dbRecipe.getName();
+        String flavorNamesString = dbRecipe.getFlavorNames();
+        String flavorAmountsString = dbRecipe.getFlavorAmounts();
+        this.flavors = new ArrayList<>();
+        if(!flavorNamesString.equals("") && !flavorAmountsString.equals("")) {
+            String[] flavorNamesArray = flavorNamesString.split(",");
+            String[] flavorAmountsArray = flavorAmountsString.split(",");
+            for(int i = 0; i < flavorNamesArray.length; ++i){
+                Flavor flavor = new Flavor(flavorNamesArray[i], Float.valueOf(flavorAmountsArray[i]));
+                this.flavors.add(flavor);
+            }
+        }
+        String baseNicString = dbRecipe.getBaseNic();
+        String[] baseNicArray = baseNicString.split(",");
+        this.baseNic = new Base(Integer.parseInt(baseNicArray[1]), Integer.parseInt(baseNicArray[2]), Integer.parseInt(baseNicArray[0]));
+    }
 
     public Recipe(int PG, int VG, int nic, String name, ArrayList<Flavor> flavors, Base baseNic, int bottleSize) {
         this.PG = PG;
