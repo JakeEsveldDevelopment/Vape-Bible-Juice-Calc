@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.jakeesveld.vapebiblejuicecalc.Adapters.SavedRecipeAdapter;
+import com.jakeesveld.vapebiblejuicecalc.Architecture.SavedRecipesViewModel;
 import com.jakeesveld.vapebiblejuicecalc.DAO.StorageDAO;
 import com.jakeesveld.vapebiblejuicecalc.Fragments.DeleteRecipeConfirmationFragment;
 import com.jakeesveld.vapebiblejuicecalc.Models.Base;
@@ -34,6 +37,7 @@ public class SavedRecipesActivity extends BaseActivity implements DeleteRecipeCo
 
     ArrayList<Recipe> recipeList;
     SavedRecipeAdapter listAdapter;
+    SavedRecipesViewModel viewModel;
 
 
     @Override
@@ -47,15 +51,31 @@ public class SavedRecipesActivity extends BaseActivity implements DeleteRecipeCo
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference(StorageDAO.user.getUid());
+
+        viewModel = ViewModelProviders.of(this).get(SavedRecipesViewModel.class);
+
+        viewModel.getData().observe(this, new Observer<ArrayList<Recipe>>() {
+            @Override
+            public void onChanged(ArrayList<Recipe> recipes) {
+                if(recipes != null){
+                    recipeList.clear();
+                    recipeList.addAll(recipes);
+                    listAdapter.notifyDataSetChanged();
+                    checkNetworkWithLocal();
+                }
+            }
+        });
+
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<Recipe> networkRecipes = new ArrayList<>();
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     Recipe recipe = snapshot.getValue(Recipe.class);
-                    recipeList.add(recipe);
+                    networkRecipes.add(recipe);
                 }
-                listAdapter.notifyDataSetChanged();
-                checkNetworkWithLocal();
+                viewModel.updateData(networkRecipes);
+
             }
 
             @Override
@@ -63,6 +83,8 @@ public class SavedRecipesActivity extends BaseActivity implements DeleteRecipeCo
 
             }
         });
+
+
     }
 
     @Override

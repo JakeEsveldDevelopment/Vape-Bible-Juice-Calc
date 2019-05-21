@@ -67,13 +67,23 @@ public class StorageDAO {
             localRecipeList.add(recipe);
         }
         ArrayList<Recipe> notOnNetworkRecipes = new ArrayList<>();
-        for(int i = 0; i < localRecipeList.size(); ++i){
-            if (!networkRecipeList.contains(localRecipeList.get(i))){
-                notOnNetworkRecipes.add(localRecipeList.get(i));
+
+        for (Recipe recipe: localRecipeList) {
+            if(!checkForRecipe(recipe, networkRecipeList)) {
+                notOnNetworkRecipes.add(recipe);
             }
         }
 
         return notOnNetworkRecipes;
+    }
+
+    private static boolean checkForRecipe(Recipe recipe, List<Recipe> list){
+        for(int i = 0; i < list.size(); ++i){
+            if(recipe.getName().equals(list.get(i).getName())){
+                return true;
+            }
+        }
+        return false;
     }
 
 }
