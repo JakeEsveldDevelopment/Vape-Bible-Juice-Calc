@@ -52,8 +52,10 @@ public class ResultsActivity extends BaseActivity implements InputFragment1.OnFr
             recipe = (Recipe) getIntent().getSerializableExtra(RECIPE_KEY);
             recipeResult = recipe.calculateResults();
             populateUi();
-            if(!recipe.getName().equals("")){
+            try{
                 editRecipeName.setText(recipe.getName());
+            }catch (NullPointerException e){
+                e.printStackTrace();
             }
 
         }
@@ -63,8 +65,18 @@ public class ResultsActivity extends BaseActivity implements InputFragment1.OnFr
             public void onClick(View v) {
                 if(!editRecipeName.getText().toString().equals("") && StorageDAO.user != null) {
                     recipe.setName(editRecipeName.getText().toString());
-                    StorageDAO.saveRecipe(recipe, getBaseContext());
-                    Toast.makeText(getBaseContext(), "Recipe Saved Successfully", Toast.LENGTH_SHORT).show();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            StorageDAO.saveRecipe(recipe, getBaseContext());
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getBaseContext(), "Recipe Saved Successfully", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }).start();
                 }else if(StorageDAO.user == null){
                     Toast.makeText(getBaseContext(), "Please log in to save recipes", Toast.LENGTH_SHORT).show();
                 }else{

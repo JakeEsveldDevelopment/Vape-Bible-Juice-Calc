@@ -112,4 +112,12 @@ public class DBRecipe {
     public void setBaseNic(String baseNic) {
         this.baseNic = baseNic;
     }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 }

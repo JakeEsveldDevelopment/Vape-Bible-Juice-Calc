@@ -11,12 +11,13 @@ import com.jakeesveld.vapebiblejuicecalc.Models.DBRecipe;
 import com.jakeesveld.vapebiblejuicecalc.Models.Recipe;
 
 public class StorageDAO {
-    public static final String DB_NAME = "recipe";
+    public static final String DB_NAME = "recipe-database";
     public static FirebaseUser user;
 
     public static void setUser(FirebaseUser user) {
         StorageDAO.user = user;
     }
+
 
     public static void saveRecipe(Recipe recipe, Context context){
         try {
@@ -26,6 +27,7 @@ public class StorageDAO {
         }catch (Exception e){
             e.printStackTrace();
         }
+
         RecipeDatabase db = Room.databaseBuilder(context,
                 RecipeDatabase.class, DB_NAME).build();
 
@@ -36,7 +38,7 @@ public class StorageDAO {
         try{
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference ref = database.getReference(user.getUid());
-            ref.child(recipe.getName()).removeValue();
+            ref.child(recipe.getName()).getRef().removeValue();
         } catch (Exception e){
             e.printStackTrace();
         }

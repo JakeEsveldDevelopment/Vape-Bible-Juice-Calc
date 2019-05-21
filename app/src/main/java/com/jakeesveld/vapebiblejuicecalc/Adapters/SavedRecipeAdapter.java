@@ -1,5 +1,6 @@
 package com.jakeesveld.vapebiblejuicecalc.Adapters;
 
+
 import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.jakeesveld.vapebiblejuicecalc.Activities.ResultsActivity;
+import com.jakeesveld.vapebiblejuicecalc.Fragments.DeleteRecipeConfirmationFragment;
 import com.jakeesveld.vapebiblejuicecalc.Models.Recipe;
 import com.jakeesveld.vapebiblejuicecalc.R;
 
@@ -17,9 +18,11 @@ import java.util.ArrayList;
 public class SavedRecipeAdapter extends RecyclerView.Adapter<SavedRecipeAdapter.ViewHolder> {
 
     private ArrayList<Recipe> dataList;
+    private DeleteRecipeConfirmationFragment.onFragmentInteractionListener listener;
 
-    public SavedRecipeAdapter(ArrayList<Recipe> dataList) {
+    public SavedRecipeAdapter(ArrayList<Recipe> dataList, DeleteRecipeConfirmationFragment.onFragmentInteractionListener listener) {
         this.dataList = dataList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -30,7 +33,7 @@ public class SavedRecipeAdapter extends RecyclerView.Adapter<SavedRecipeAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         final Recipe data = dataList.get(i);
 
         viewHolder.textRecipeName.setText(data.getName());
@@ -43,6 +46,16 @@ public class SavedRecipeAdapter extends RecyclerView.Adapter<SavedRecipeAdapter.
                 Intent intent = new Intent(v.getContext(), ResultsActivity.class);
                 intent.putExtra(ResultsActivity.RECIPE_KEY, data);
                 v.getContext().startActivity(intent);
+            }
+        });
+
+        viewHolder.parent.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(listener != null){
+                    listener.onFragmentInteraction(data);
+                }
+                return true;
             }
         });
 
