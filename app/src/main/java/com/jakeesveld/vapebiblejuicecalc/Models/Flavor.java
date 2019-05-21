@@ -11,6 +11,9 @@ public class Flavor implements Serializable {
         this.amount = amount;
     }
 
+    public Flavor() {
+    }
+
     public String getName() {
         return name;
     }

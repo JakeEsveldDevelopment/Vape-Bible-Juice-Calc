@@ -11,7 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.jakeesveld.vapebiblejuicecalc.DAO.FirebaseDAO;
 import com.jakeesveld.vapebiblejuicecalc.Fragments.InputFragment1;
 import com.jakeesveld.vapebiblejuicecalc.Fragments.InputFragment2;
 import com.jakeesveld.vapebiblejuicecalc.Models.Recipe;
@@ -39,6 +41,8 @@ public class ResultsActivity extends BaseActivity implements InputFragment1.OnFr
         textNicResult = findViewById(R.id.text_nic_result);
         textVGResult = findViewById(R.id.text_vg_result);
         textPGResult = findViewById(R.id.text_pg_result);
+        buttonSave = findViewById(R.id.button_save);
+        editRecipeName = findViewById(R.id.edit_recipe_name);
         if(getIntent().getExtras() == null) {
             final FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -50,8 +54,26 @@ public class ResultsActivity extends BaseActivity implements InputFragment1.OnFr
             recipe = (Recipe) getIntent().getSerializableExtra(RECIPE_KEY);
             recipeResult = recipe.calculateResults();
             populateUi();
+            if(!recipe.getName().equals("")){
+                editRecipeName.setText(recipe.getName());
+            }
 
         }
+
+        buttonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!editRecipeName.getText().toString().equals("") && FirebaseDAO.user != null) {
+                    recipe.setName(editRecipeName.getText().toString());
+                    FirebaseDAO.saveRecipe(recipe);
+                    Toast.makeText(getBaseContext(), "Recipe Saved Successfully", Toast.LENGTH_SHORT).show();
+                }else if(FirebaseDAO.user == null){
+                    Toast.makeText(getBaseContext(), "Please log in to save recipes", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getBaseContext(), "Please name your recipe to save", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     public void populateUi(){

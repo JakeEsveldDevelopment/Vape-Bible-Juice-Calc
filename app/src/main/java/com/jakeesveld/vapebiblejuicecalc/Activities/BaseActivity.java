@@ -48,10 +48,14 @@ public class BaseActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch(menuItem.getItemId()){
+                    case R.id.nav_main_menu:
+                        startActivity(new Intent(getBaseContext(), MainMenu.class));
+                        break;
                     case R.id.nav_create_new:
                         startActivity(new Intent(getBaseContext(), ResultsActivity.class));
                         break;
                     case R.id.nav_help:
+                        startActivity(new Intent(getBaseContext(), HowToActivity.class));
                         break;
                     case R.id.nav_login:
                         List<AuthUI.IdpConfig> providers = Arrays.asList(
@@ -63,6 +67,11 @@ public class BaseActivity extends AppCompatActivity {
                                         .build(), AUTH_REQUEST_CODE);
                         break;
                     case R.id.nav_saved_recipes:
+                        if(FirebaseDAO.user == null){
+                            Toast.makeText(getBaseContext(), "Please log in to view saved recipes", Toast.LENGTH_LONG).show();
+                        }else{
+                            startActivity(new Intent(getBaseContext(), SavedRecipesActivity.class));
+                        }
                         break;
                     case R.id.nav_example_recipes:
                         break;

@@ -11,6 +11,9 @@ public class Base implements Serializable {
         this.strength = strength;
     }
 
+    public Base() {
+    }
+
     public int getVG() {
         return VG;
     }
