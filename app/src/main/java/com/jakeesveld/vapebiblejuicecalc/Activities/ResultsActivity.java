@@ -1,6 +1,8 @@
 package com.jakeesveld.vapebiblejuicecalc.Activities;
 
 import android.net.Uri;
+
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -24,7 +26,7 @@ public class ResultsActivity extends BaseActivity implements InputFragment1.OnFr
 
     public static final String RECIPE_KEY = "Recipe";
     LinearLayout layoutColumn1, layoutColumn2;
-    Button buttonSave;
+    Button buttonSave, buttonEdit;
     EditText editRecipeName;
     TextView textVGResult, textPGResult, textNicResult;
     RecipeResult recipeResult;
@@ -40,6 +42,7 @@ public class ResultsActivity extends BaseActivity implements InputFragment1.OnFr
         textVGResult = findViewById(R.id.text_vg_result);
         textPGResult = findViewById(R.id.text_pg_result);
         buttonSave = findViewById(R.id.button_save);
+        buttonEdit = findViewById(R.id.button_edit_recipe);
         editRecipeName = findViewById(R.id.edit_recipe_name);
         if(getIntent().getExtras() == null) {
             final FragmentManager fragmentManager = getSupportFragmentManager();
@@ -82,6 +85,22 @@ public class ResultsActivity extends BaseActivity implements InputFragment1.OnFr
                 }else{
                     Toast.makeText(getBaseContext(), "Please name your recipe to save", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        buttonEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                Fragment fragment = new InputFragment1();
+                Bundle arguments = new Bundle();
+                arguments.putSerializable(RECIPE_KEY, recipe);
+                fragment.setArguments(arguments);
+                fragmentTransaction
+                        .replace(R.id.container, fragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
     }

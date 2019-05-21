@@ -33,7 +33,7 @@ public class InputFragment1 extends Fragment {
     public static final int FRAGMENT_REQUEST_CODE = 10;
     EditText editBottleSize, editDesiredStrength, editDesiredPG, editDesiredVG, editBaseStrength, editBaseVG, editBasePG;
     SeekBar desiredRatioSeekbar, baseRatioSeekbar;
-    Recipe newRecipe;
+    Recipe newRecipe, editableRecipe;
     Button buttonNextPage;
 
 
@@ -61,8 +61,9 @@ public class InputFragment1 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        editableRecipe = null;
         if (getArguments() != null) {
-
+            editableRecipe = (Recipe) getArguments().getSerializable(ResultsActivity.RECIPE_KEY);
         }
     }
 
@@ -86,6 +87,16 @@ public class InputFragment1 extends Fragment {
         baseRatioSeekbar = view.findViewById(R.id.seekbar_base_ratio);
         buttonNextPage = view.findViewById(R.id.button_next_page);
         newRecipe = new Recipe();
+
+        if(editableRecipe != null){
+            editBottleSize.setText(String.valueOf(editableRecipe.getBottleSize()));
+            editDesiredStrength.setText(String.valueOf(editableRecipe.getNic()));
+            editDesiredPG.setText(String.valueOf(editableRecipe.getPG()));
+            editDesiredVG.setText(String.valueOf(editableRecipe.getVG()));
+            editBaseStrength.setText(String.valueOf(editableRecipe.getBaseNic().getStrength()));
+            editBaseVG.setText(String.valueOf(editableRecipe.getBaseNic().getVG()));
+            editBasePG.setText(String.valueOf(editableRecipe.getBaseNic().getPG()));
+        }
 
         desiredRatioSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -141,6 +152,10 @@ public class InputFragment1 extends Fragment {
                         newRecipe.setNic(Integer.parseInt(editDesiredStrength.getText().toString()));
                         newRecipe.setPG(Integer.parseInt(editDesiredPG.getText().toString().replace("%", "")));
                         newRecipe.setVG(Integer.parseInt(editDesiredVG.getText().toString().replace("%", "")));
+                        if(editableRecipe != null){
+                            newRecipe.setFlavors(editableRecipe.getFlavors());
+                            newRecipe.setName(editableRecipe.getName());
+                        }
                         Fragment inputFragment2 = new InputFragment2();
                         Bundle args = new Bundle();
                         args.putSerializable(ResultsActivity.RECIPE_KEY, newRecipe);

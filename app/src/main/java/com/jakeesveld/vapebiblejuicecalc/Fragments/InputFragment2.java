@@ -85,10 +85,16 @@ public class InputFragment2 extends Fragment {
         buttonResults = view.findViewById(R.id.button_results);
         flavors = new ArrayList<>();
 
+        if(recipe.getFlavors().size() > 0){
+            for(Flavor flavor: recipe.getFlavors()){
+                addFlavor(flavor);
+            }
+        }
+
         buttonAddFlavor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addFlavor();
+                addFlavor(null);
             }
         });
 
@@ -117,11 +123,17 @@ public class InputFragment2 extends Fragment {
 
     }
 
-    public void addFlavor() {
+    public void addFlavor(Flavor flavor) {
+
         EditText flavorName = new EditText(getContext());
         EditText flavorPercentage = new EditText(getContext());
-        flavorName.setHint("Flavor Name");
-        flavorPercentage.setHint("%");
+        if(flavor == null) {
+            flavorName.setHint("Flavor Name");
+            flavorPercentage.setHint("%");
+        }else{
+            flavorName.setText(flavor.getName());
+            flavorPercentage.setText(String.valueOf(flavor.getAmount()));
+        }
         flavorPercentage.setInputType(InputType.TYPE_CLASS_NUMBER);
         flavorPercentage.setGravity(Gravity.END);
 
