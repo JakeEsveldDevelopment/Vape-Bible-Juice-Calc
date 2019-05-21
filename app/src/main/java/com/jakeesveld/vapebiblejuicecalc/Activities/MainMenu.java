@@ -2,20 +2,16 @@ package com.jakeesveld.vapebiblejuicecalc.Activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
-import com.jakeesveld.vapebiblejuicecalc.Activities.BaseActivity;
-import com.jakeesveld.vapebiblejuicecalc.DAO.FirebaseDAO;
+import com.jakeesveld.vapebiblejuicecalc.DAO.StorageDAO;
 import com.jakeesveld.vapebiblejuicecalc.R;
 
 import java.util.Arrays;
 import java.util.List;
-
-import javax.xml.transform.Result;
 
 public class MainMenu extends BaseActivity {
     Context context;
@@ -53,7 +49,7 @@ public class MainMenu extends BaseActivity {
         findViewById(R.id.button_saved_recipes).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(FirebaseDAO.user == null){
+                if(StorageDAO.user == null){
                     Toast.makeText(getBaseContext(), "Please log in to view saved recipes", Toast.LENGTH_LONG).show();
                 }else{
                     startActivity(new Intent(getBaseContext(), SavedRecipesActivity.class));

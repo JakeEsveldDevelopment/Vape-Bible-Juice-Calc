@@ -1,10 +1,10 @@
 package com.jakeesveld.vapebiblejuicecalc.Activities;
 
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -12,7 +12,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.jakeesveld.vapebiblejuicecalc.Adapters.SavedRecipeAdapter;
-import com.jakeesveld.vapebiblejuicecalc.DAO.FirebaseDAO;
+import com.jakeesveld.vapebiblejuicecalc.DAO.StorageDAO;
 import com.jakeesveld.vapebiblejuicecalc.Models.Recipe;
 import com.jakeesveld.vapebiblejuicecalc.R;
 
@@ -33,7 +33,7 @@ public class SavedRecipesActivity extends AppCompatActivity {
         recyclerView.setAdapter(listAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference(FirebaseDAO.user.getUid());
+        DatabaseReference ref = database.getReference(StorageDAO.user.getUid());
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

@@ -1,17 +1,16 @@
 package com.jakeesveld.vapebiblejuicecalc.Activities;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.material.navigation.NavigationView;
+
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -20,7 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.jakeesveld.vapebiblejuicecalc.DAO.FirebaseDAO;
+import com.jakeesveld.vapebiblejuicecalc.DAO.StorageDAO;
 import com.jakeesveld.vapebiblejuicecalc.R;
 
 import java.util.Arrays;
@@ -67,7 +66,7 @@ public class BaseActivity extends AppCompatActivity {
                                         .build(), AUTH_REQUEST_CODE);
                         break;
                     case R.id.nav_saved_recipes:
-                        if(FirebaseDAO.user == null){
+                        if(StorageDAO.user == null){
                             Toast.makeText(getBaseContext(), "Please log in to view saved recipes", Toast.LENGTH_LONG).show();
                         }else{
                             startActivity(new Intent(getBaseContext(), SavedRecipesActivity.class));
@@ -81,7 +80,7 @@ public class BaseActivity extends AppCompatActivity {
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         Toast.makeText(getBaseContext(), "Successfully Logged Out", Toast.LENGTH_LONG).show();
-                                        FirebaseDAO.setUser(null);
+                                        StorageDAO.setUser(null);
                                     }
                                 });
                         break;
@@ -102,7 +101,7 @@ public class BaseActivity extends AppCompatActivity {
 
             if (resultCode == RESULT_OK) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                FirebaseDAO.setUser(user);
+                StorageDAO.setUser(user);
             } else {
                 Toast.makeText(getBaseContext(), "Login Failed", Toast.LENGTH_LONG).show();
             }

@@ -1,9 +1,9 @@
 package com.jakeesveld.vapebiblejuicecalc.Activities;
 
 import android.net.Uri;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -13,14 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jakeesveld.vapebiblejuicecalc.DAO.FirebaseDAO;
+import com.jakeesveld.vapebiblejuicecalc.DAO.StorageDAO;
 import com.jakeesveld.vapebiblejuicecalc.Fragments.InputFragment1;
 import com.jakeesveld.vapebiblejuicecalc.Fragments.InputFragment2;
 import com.jakeesveld.vapebiblejuicecalc.Models.Recipe;
 import com.jakeesveld.vapebiblejuicecalc.Models.RecipeResult;
 import com.jakeesveld.vapebiblejuicecalc.R;
-
-import org.w3c.dom.Text;
 
 public class ResultsActivity extends BaseActivity implements InputFragment1.OnFragmentInteractionListener, InputFragment2.OnFragmentInteractionListener {
 
@@ -63,11 +61,11 @@ public class ResultsActivity extends BaseActivity implements InputFragment1.OnFr
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!editRecipeName.getText().toString().equals("") && FirebaseDAO.user != null) {
+                if(!editRecipeName.getText().toString().equals("") && StorageDAO.user != null) {
                     recipe.setName(editRecipeName.getText().toString());
-                    FirebaseDAO.saveRecipe(recipe);
+                    StorageDAO.saveRecipe(recipe, getBaseContext());
                     Toast.makeText(getBaseContext(), "Recipe Saved Successfully", Toast.LENGTH_SHORT).show();
-                }else if(FirebaseDAO.user == null){
+                }else if(StorageDAO.user == null){
                     Toast.makeText(getBaseContext(), "Please log in to save recipes", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(getBaseContext(), "Please name your recipe to save", Toast.LENGTH_SHORT).show();
