@@ -1,6 +1,7 @@
 package com.jakeesveld.vapebiblejuicecalc.DAO;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteConstraintException;
 
 import androidx.room.Room;
 
@@ -31,7 +32,11 @@ public class StorageDAO {
         RecipeDatabase db = Room.databaseBuilder(context,
                 RecipeDatabase.class, DB_NAME).build();
 
-        db.recipeDAO().addRecipe(new DBRecipe(recipe));
+        try {
+            db.recipeDAO().addRecipe(new DBRecipe(recipe));
+        } catch (SQLiteConstraintException e){
+            db.recipeDAO().updateRecipe(new DBRecipe(recipe));
+        }
     }
 
     public static void deleteRecipe(Recipe recipe, Context context){

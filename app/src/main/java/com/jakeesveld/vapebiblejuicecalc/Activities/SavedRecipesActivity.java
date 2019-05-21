@@ -19,12 +19,13 @@ import com.google.firebase.database.ValueEventListener;
 import com.jakeesveld.vapebiblejuicecalc.Adapters.SavedRecipeAdapter;
 import com.jakeesveld.vapebiblejuicecalc.DAO.StorageDAO;
 import com.jakeesveld.vapebiblejuicecalc.Fragments.DeleteRecipeConfirmationFragment;
+import com.jakeesveld.vapebiblejuicecalc.Models.Base;
 import com.jakeesveld.vapebiblejuicecalc.Models.Recipe;
 import com.jakeesveld.vapebiblejuicecalc.R;
 
 import java.util.ArrayList;
 
-public class SavedRecipesActivity extends AppCompatActivity implements DeleteRecipeConfirmationFragment.onFragmentInteractionListener, DeleteRecipeConfirmationFragment.onDeleteRequestListener {
+public class SavedRecipesActivity extends BaseActivity implements DeleteRecipeConfirmationFragment.onFragmentInteractionListener, DeleteRecipeConfirmationFragment.onDeleteRequestListener {
 
     public static final int DELETE_REQUEST_CODE = 178;
     public static final int DELETE_CONFIRMED = 19933;
