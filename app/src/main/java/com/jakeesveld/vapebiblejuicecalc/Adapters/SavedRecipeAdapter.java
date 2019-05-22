@@ -40,8 +40,10 @@ public class SavedRecipeAdapter extends RecyclerView.Adapter<SavedRecipeAdapter.
         viewHolder.textLastSize.setText("Last Bottle Size: " + String.valueOf(data.getBottleSize() + "mL"));
         viewHolder.textLastStrength.setText("Last Nicotine Strength: " + String.valueOf(data.getNic()) + "mg");
 
-        if(!data.getProfile().equals("")){
+        try{
             viewHolder.textRecipeProfile.setText(data.getProfile());
+        }catch (Exception e){
+            viewHolder.textRecipeProfile.setText("No Flavor Profile Saved");
         }
 
         viewHolder.parent.setOnClickListener(new View.OnClickListener() {

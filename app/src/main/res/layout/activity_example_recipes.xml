@@ -43,7 +43,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 app:layout_constraintTop_toBottomOf="@id/text_title"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toTopOf="@id/text_disclaimer"/>
+
+
+            <TextView
+                android:textSize="24sp"
+                android:text="*All Example Recipes are set to 120ml size, 3mg Nicotine, and 70/30 ratio by default using 100mg VG nicotine solution*"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/text_disclaimer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
