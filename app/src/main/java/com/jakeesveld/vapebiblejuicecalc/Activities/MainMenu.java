@@ -56,5 +56,12 @@ public class MainMenu extends BaseActivity {
                 }
             }
         });
+
+        findViewById(R.id.button_example_recipes).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getBaseContext(), ExampleRecipesActivity.class));
+            }
+        });
     }
 }

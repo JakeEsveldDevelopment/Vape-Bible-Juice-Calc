@@ -73,6 +73,7 @@ public class BaseActivity extends AppCompatActivity {
                         }
                         break;
                     case R.id.nav_example_recipes:
+                        startActivity(new Intent(getBaseContext(), ExampleRecipesActivity.class));
                         break;
                     case R.id.nav_logout:
                         AuthUI.getInstance()

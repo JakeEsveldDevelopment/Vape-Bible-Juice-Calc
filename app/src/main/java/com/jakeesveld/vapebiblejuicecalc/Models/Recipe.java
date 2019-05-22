@@ -10,6 +10,7 @@ public class Recipe implements Serializable {
     private String name;
     private ArrayList<Flavor> flavors;
     private Base baseNic;
+    private String profile;
 
     public Recipe(DBRecipe dbRecipe){
         this.PG = dbRecipe.getPG();
@@ -131,6 +132,14 @@ public class Recipe implements Serializable {
 
     public void setBaseNic(Base baseNic) {
         this.baseNic = baseNic;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 
     public void addFlavor(Flavor flavor){
