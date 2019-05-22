@@ -33,7 +33,7 @@ public class InputFragment1 extends Fragment {
     public static final int FRAGMENT_REQUEST_CODE = 10;
     EditText editBottleSize, editDesiredStrength, editDesiredPG, editDesiredVG, editBaseStrength, editBaseVG, editBasePG;
     SeekBar desiredRatioSeekbar, baseRatioSeekbar;
-    Recipe newRecipe, editableRecipe;
+    Recipe editableRecipe;
     Button buttonNextPage;
 
 
@@ -61,6 +61,8 @@ public class InputFragment1 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         editableRecipe = null;
         if (getArguments() != null) {
             editableRecipe = (Recipe) getArguments().getSerializable(ResultsActivity.RECIPE_KEY);
@@ -86,16 +88,10 @@ public class InputFragment1 extends Fragment {
         desiredRatioSeekbar = view.findViewById(R.id.seekbar_desired_ratio);
         baseRatioSeekbar = view.findViewById(R.id.seekbar_base_ratio);
         buttonNextPage = view.findViewById(R.id.button_next_page);
-        newRecipe = new Recipe();
+
 
         if(editableRecipe != null){
-            editBottleSize.setText(String.valueOf(editableRecipe.getBottleSize()));
-            editDesiredStrength.setText(String.valueOf(editableRecipe.getNic()));
-            editDesiredPG.setText(String.valueOf(editableRecipe.getPG()));
-            editDesiredVG.setText(String.valueOf(editableRecipe.getVG()));
-            editBaseStrength.setText(String.valueOf(editableRecipe.getBaseNic().getStrength()));
-            editBaseVG.setText(String.valueOf(editableRecipe.getBaseNic().getVG()));
-            editBasePG.setText(String.valueOf(editableRecipe.getBaseNic().getPG()));
+            populateUI();
         }
 
         desiredRatioSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -143,15 +139,7 @@ public class InputFragment1 extends Fragment {
                     Snackbar.make(view, "Please fill out all fields to continue", Snackbar.LENGTH_LONG).show();
                 }else{
                     try{
-                        int baseVG = Integer.parseInt(editBaseVG.getText().toString().replace("%", ""));
-                        int basePG = Integer.parseInt(editBasePG.getText().toString().replace("%", ""));
-                        int baseStrength = Integer.parseInt(editBaseStrength.getText().toString());
-                        Base newRecipeBase = new Base(baseVG, basePG, baseStrength);
-                        newRecipe.setBaseNic(newRecipeBase);
-                        newRecipe.setBottleSize(Integer.parseInt(editBottleSize.getText().toString()));
-                        newRecipe.setNic(Integer.parseInt(editDesiredStrength.getText().toString()));
-                        newRecipe.setPG(Integer.parseInt(editDesiredPG.getText().toString().replace("%", "")));
-                        newRecipe.setVG(Integer.parseInt(editDesiredVG.getText().toString().replace("%", "")));
+                        Recipe newRecipe = makeRecipeObject();
                         if(editableRecipe != null){
                             newRecipe.setFlavors(editableRecipe.getFlavors());
                             newRecipe.setName(editableRecipe.getName());
@@ -173,11 +161,63 @@ public class InputFragment1 extends Fragment {
         });
     }
 
+    private Recipe makeRecipeObject(){
+        try{
+            Recipe newRecipe = new Recipe();
+            int baseVG = Integer.parseInt(editBaseVG.getText().toString().replace("%", ""));
+            int basePG = Integer.parseInt(editBasePG.getText().toString().replace("%", ""));
+            if(!editBaseStrength.getText().toString().equals("")) {
+                int baseStrength = Integer.parseInt(editBaseStrength.getText().toString());
+                Base newRecipeBase = new Base(baseVG, basePG, baseStrength);
+                newRecipe.setBaseNic(newRecipeBase);
+            }
+            if(!editBottleSize.getText().toString().equals("")) {
+                newRecipe.setBottleSize(Integer.parseInt(editBottleSize.getText().toString()));
+            }
+            if(!editDesiredStrength.getText().toString().equals("")) {
+                newRecipe.setNic(Integer.parseInt(editDesiredStrength.getText().toString()));
+            }
+            newRecipe.setPG(Integer.parseInt(editDesiredPG.getText().toString().replace("%", "")));
+            newRecipe.setVG(Integer.parseInt(editDesiredVG.getText().toString().replace("%", "")));
+            return newRecipe;
+        }catch (Exception e){
+            return null;
+        }
+    }
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
     }
+
+    private void populateUI(){
+        if(editableRecipe.getBottleSize() != 0) {
+            editBottleSize.setText(String.valueOf(editableRecipe.getBottleSize()));
+        }
+        if(editableRecipe.getNic() != 0) {
+            editDesiredStrength.setText(String.valueOf(editableRecipe.getNic()));
+        }
+        if (editableRecipe.getPG() != 0) {
+            editDesiredPG.setText(String.valueOf(editableRecipe.getPG()));
+        }
+        if (editableRecipe.getVG() != 0) {
+            editDesiredVG.setText(String.valueOf(editableRecipe.getVG()));
+        }
+        if(editableRecipe.getBaseNic() != null) {
+            if(editableRecipe.getBaseNic().getStrength() != 0) {
+                editBaseStrength.setText(String.valueOf(editableRecipe.getBaseNic().getStrength()));
+            }
+            if (editableRecipe.getBaseNic().getVG() != 0) {
+                editBaseVG.setText(String.valueOf(editableRecipe.getBaseNic().getVG()));
+            }
+            if(editableRecipe.getBaseNic().getPG() != 0) {
+                editBasePG.setText(String.valueOf(editableRecipe.getBaseNic().getPG()));
+            }
+        }
+    }
+
+
 
     @Override
     public void onAttach(Context context) {
@@ -194,6 +234,7 @@ public class InputFragment1 extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+
     }
 
     /**

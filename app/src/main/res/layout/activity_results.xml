@@ -26,6 +26,7 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@drawable/gradient_background"
             android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -59,6 +60,15 @@
                 android:id="@+id/edit_recipe_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            <EditText
+                android:textAlignment="center"
+                android:layout_marginEnd="50dp"
+                android:layout_marginStart="50dp"
+                android:hint="Recipe Profile"
+                app:layout_constraintBottom_toTopOf="@id/button_save"
+                android:id="@+id/edit_recipe_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -71,7 +81,7 @@
                     android:id="@+id/layout_column_1"
                     android:orientation="vertical"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:layout_height="wrap_content">
 
                     <TextView

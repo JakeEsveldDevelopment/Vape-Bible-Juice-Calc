@@ -75,6 +75,8 @@ public class Recipe implements Serializable {
 
     public Recipe() {
         this.flavors = new ArrayList<>();
+        this.name = "";
+        this.profile = "";
     }
 
     public int getBottleSize() {

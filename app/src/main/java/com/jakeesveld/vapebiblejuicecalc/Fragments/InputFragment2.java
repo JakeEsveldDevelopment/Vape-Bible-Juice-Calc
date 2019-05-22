@@ -134,7 +134,7 @@ public class InputFragment2 extends Fragment {
             flavorName.setText(flavor.getName());
             flavorPercentage.setText(String.valueOf(flavor.getAmount()));
         }
-        flavorPercentage.setInputType(InputType.TYPE_CLASS_NUMBER);
+        flavorPercentage.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         flavorPercentage.setGravity(Gravity.END);
 
         layoutFlavorName.addView(flavorName);

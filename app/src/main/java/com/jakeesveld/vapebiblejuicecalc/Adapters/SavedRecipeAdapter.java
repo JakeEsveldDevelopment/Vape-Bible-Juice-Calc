@@ -40,6 +40,10 @@ public class SavedRecipeAdapter extends RecyclerView.Adapter<SavedRecipeAdapter.
         viewHolder.textLastSize.setText("Last Bottle Size: " + String.valueOf(data.getBottleSize() + "mL"));
         viewHolder.textLastStrength.setText("Last Nicotine Strength: " + String.valueOf(data.getNic()) + "mg");
 
+        if(!data.getProfile().equals("")){
+            viewHolder.textRecipeProfile.setText(data.getProfile());
+        }
+
         viewHolder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,13 +71,14 @@ public class SavedRecipeAdapter extends RecyclerView.Adapter<SavedRecipeAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textRecipeName, textLastSize, textLastStrength;
+        TextView textRecipeName, textLastSize, textLastStrength, textRecipeProfile;
         View parent;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textRecipeName = itemView.findViewById(R.id.text_recipe_name);
             textLastSize = itemView.findViewById(R.id.text_last_size);
             textLastStrength = itemView.findViewById(R.id.text_last_strength);
+            textRecipeProfile = itemView.findViewById(R.id.text_recipe_profile);
             parent = itemView.findViewById(R.id.parent);
         }
     }

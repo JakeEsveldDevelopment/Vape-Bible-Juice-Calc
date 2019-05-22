@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
+    android:layout_margin="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/inverse_gradient_background"
         android:id="@+id/parent"
         android:padding="10dp"
         android:layout_width="match_parent"
@@ -21,13 +24,23 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/text_recipe_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tasty taste with a taste"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/text_recipe_name" />
+
+        <TextView
             android:id="@+id/text_last_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Last size: 120mL"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_recipe_name" />
+            app:layout_constraintTop_toBottomOf="@id/text_recipe_profile" />
 
         <TextView
             android:id="@+id/text_last_strength"
@@ -36,7 +49,7 @@
             android:text="Last strength: 3mg/mL"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_recipe_name" />
+            app:layout_constraintTop_toBottomOf="@id/text_recipe_profile" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

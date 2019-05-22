@@ -23,6 +23,7 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.appbar.AppBarLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@drawable/gradient_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

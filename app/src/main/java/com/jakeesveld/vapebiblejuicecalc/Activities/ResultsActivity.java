@@ -1,5 +1,6 @@
 package com.jakeesveld.vapebiblejuicecalc.Activities;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -7,7 +8,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.jakeesveld.vapebiblejuicecalc.DAO.StorageDAO;
 import com.jakeesveld.vapebiblejuicecalc.Fragments.InputFragment1;
 import com.jakeesveld.vapebiblejuicecalc.Fragments.InputFragment2;
@@ -28,7 +32,7 @@ public class ResultsActivity extends BaseActivity implements InputFragment1.OnFr
     public static final String RECIPE_KEY = "Recipe";
     LinearLayout layoutColumn1, layoutColumn2;
     Button buttonSave, buttonEdit;
-    EditText editRecipeName;
+    EditText editRecipeName, editRecipeProfile;
     TextView textVGResult, textPGResult, textNicResult;
     RecipeResult recipeResult;
     Recipe recipe;
@@ -45,20 +49,21 @@ public class ResultsActivity extends BaseActivity implements InputFragment1.OnFr
         buttonSave = findViewById(R.id.button_save);
         buttonEdit = findViewById(R.id.button_edit_recipe);
         editRecipeName = findViewById(R.id.edit_recipe_name);
-        if(getIntent().getExtras() == null) {
+        editRecipeProfile = findViewById(R.id.edit_recipe_profile);
+        if (getIntent().getExtras() == null) {
             final FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction
-                    .replace(R.id.container, new InputFragment1())
+                    .add(R.id.container, new InputFragment1())
                     .addToBackStack(null)
                     .commit();
-        }else{
+        } else {
             recipe = (Recipe) getIntent().getSerializableExtra(RECIPE_KEY);
             recipeResult = recipe.calculateResults();
             populateUi();
-            try{
+            try {
                 editRecipeName.setText(recipe.getName());
-            }catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 e.printStackTrace();
             }
 
@@ -67,8 +72,12 @@ public class ResultsActivity extends BaseActivity implements InputFragment1.OnFr
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!editRecipeName.getText().toString().equals("") && StorageDAO.user != null) {
+                if (!editRecipeName.getText().toString().equals("") && StorageDAO.user != null) {
                     recipe.setName(editRecipeName.getText().toString());
+                    if (!editRecipeProfile.getText().toString().equals("")) {
+                        recipe.setProfile(editRecipeProfile.getText().toString());
+                    }
+
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -82,9 +91,10 @@ public class ResultsActivity extends BaseActivity implements InputFragment1.OnFr
                             });
                         }
                     }).start();
-                }else if(StorageDAO.user == null){
+
+                } else if (StorageDAO.user == null) {
                     Toast.makeText(getBaseContext(), "Please log in to save recipes", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     Toast.makeText(getBaseContext(), "Please name your recipe to save", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -107,18 +117,22 @@ public class ResultsActivity extends BaseActivity implements InputFragment1.OnFr
         });
     }
 
-    public void populateUi(){
+    @TargetApi(Build.VERSION_CODES.O)
+    public void populateUi() {
 
         textPGResult.setText(String.format("%.1f mL", recipeResult.getPG()));
         textVGResult.setText(String.format("%.1f mL", recipeResult.getVG()));
         textNicResult.setText(String.format("%.1f mL", recipeResult.getNic()));
-        for(int i = 0; i < recipe.getFlavors().size(); ++i){
+        for (int i = 0; i < recipe.getFlavors().size(); ++i) {
             String flavorName = recipe.getFlavors().get(i).getName();
             float flavorAmount = recipeResult.getFlavorAmounts().get(i);
             TextView flavorNameView = new TextView(getBaseContext());
             TextView flavorAmountView = new TextView(getBaseContext());
             flavorNameView.setText(flavorName);
             flavorNameView.setTextSize(24);
+            flavorNameView.setLines(1);
+            flavorNameView.setMaxLines(1);
+            flavorNameView.setAutoSizeTextTypeUniformWithConfiguration(12, 24, 2, TypedValue.COMPLEX_UNIT_SP);
             layoutColumn1.addView(flavorNameView);
             flavorAmountView.setText(String.format("%.1f mL", flavorAmount));
             flavorAmountView.setTextSize(24);

@@ -24,6 +24,13 @@ public class StorageDAO {
     }
 
 
+    public static void saveToExamples(Recipe recipe){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("Examples");
+        ref.child(recipe.getName()).setValue(recipe);
+    }
+
+
     public static void saveRecipe(Recipe recipe, Context context){
         try {
             FirebaseDatabase database = FirebaseDatabase.getInstance();

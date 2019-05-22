@@ -12,7 +12,7 @@
         <activity android:name=".Activities.ExampleRecipesActivity"></activity>
         <activity android:name=".Activities.SavedRecipesActivity" />
         <activity android:name=".Activities.HowToActivity" />
-        <activity android:name=".Activities.ResultsActivity" />
+        <activity android:name=".Activities.ResultsActivity" android:screenOrientation="locked"/>
         <activity android:name=".Activities.MainMenu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
