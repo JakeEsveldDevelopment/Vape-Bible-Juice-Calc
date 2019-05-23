@@ -40,6 +40,7 @@ public class HowToPagerAdapter extends PagerAdapter {
         TextView textView = itemView.findViewById(R.id.text_content);
         textView.setText(resources[position]);
         TextView titleView = itemView.findViewById(R.id.text_title);
+        TextView disclaimerView = itemView.findViewById(R.id.text_disclaimer);
         switch (position){
             case 0:
                 titleView.setText("How to: Use this App");
@@ -47,6 +48,14 @@ public class HowToPagerAdapter extends PagerAdapter {
             case 1:
                 titleView.setText("Flavor Mixing Tips");
                 break;
+            case 2:
+                titleView.setText("Common Shorthands in the DIY Community");
+                break;
+            case 3:
+                titleView.setText("That's All for now!");
+                disclaimerView.setVisibility(View.GONE);
+                break;
+
         }
 
         container.addView(itemView);

@@ -11,7 +11,6 @@
         android:id="@+id/text_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:textAlignment="center"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -22,11 +21,13 @@
         android:id="@+id/text_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/flavor_mixing_tips"
+        android:text="@string/common_shorthands"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/text_title" />
+        app:layout_constraintTop_toBottomOf="@id/text_title"
+        app:layout_constraintBottom_toTopOf="@id/text_disclaimer"/>
 
     <TextView
+        android:id="@+id/text_disclaimer"
         android:textStyle="bold"
         android:textAlignment="center"
         android:text="@string/viewPager_disclaimer"

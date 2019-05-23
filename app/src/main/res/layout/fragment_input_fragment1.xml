@@ -256,6 +256,7 @@
     </LinearLayout>
 
     <Button
+        android:background="@drawable/rounded_button"
         android:layout_margin="20dp"
         android:id="@+id/button_next_page"
         android:text="Next Page: Flavors"

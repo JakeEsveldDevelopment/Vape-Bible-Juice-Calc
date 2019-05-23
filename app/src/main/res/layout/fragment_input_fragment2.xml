@@ -50,6 +50,7 @@
     </ScrollView>
 
     <Button
+        android:background="@drawable/rounded_button"
         android:id="@+id/button_add_flavor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,6 +61,7 @@
         app:layout_constraintBottom_toTopOf="@id/button_results" />
 
     <Button
+        android:background="@drawable/rounded_button"
         android:id="@+id/button_results"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

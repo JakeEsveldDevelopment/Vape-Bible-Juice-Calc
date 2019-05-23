@@ -17,4 +17,6 @@
     <string name="viewPager_disclaimer">*Swipe right to see next page*</string>
     <string name="title_activity_maps">Map</string>
     <string name="distributor_map">Distributor Map</string>
+    <string name="common_shorthands">Sometimes, when looking at recipes written by other people, the recipe will use common shorthand for things like brands, and common flavors. Some may be easy enough to figure out (Straw is short for strawberry) but some on the other hand might night be as simple. (V.B.I.C. is commonly used to refer to Vanilla Bean Ice Cream) While you may never know all the shorthand for all the flavor concentrates out there, here are some of the common shorthands for major concentrate brands:\n\nThe Flavor Apprentice: TFA\nFlavor West: FW\nCapella: CAP\nFlavor Art: FA\nInawera: INW\nReal Flavors: RF\nFlavorah: FLV \n\nHopefullly, this helps you to find the right concentrates to buy if you decide to try out another DIYers Recipe and they use one of these shorthands</string>
+    <string name="coming_soon">More Coming Soon!</string>
 </resources>

@@ -51,6 +51,7 @@
                 android:orientation="vertical">
 
                 <Button
+                    android:background="@drawable/rounded_button"
                     android:text="@string/create_new_recipe"
                     android:textStyle="bold"
                     android:id="@+id/button_create_new"
@@ -59,6 +60,7 @@
                     android:layout_weight="1"
                     android:layout_margin="15dp"/>
                 <Button
+                    android:background="@drawable/rounded_button"
                     android:text="@string/how_to_help"
                     android:textStyle="bold"
                     android:id="@+id/button_how_to"
@@ -67,6 +69,7 @@
                     android:layout_weight="1"
                     android:layout_margin="15dp"/>
                 <Button
+                    android:background="@drawable/rounded_button"
                     android:text="@string/log_in_register"
                     android:textStyle="bold"
                     android:id="@+id/button_login"
@@ -75,6 +78,7 @@
                     android:layout_weight="1"
                     android:layout_margin="15dp"/>
                 <Button
+                    android:background="@drawable/rounded_button"
                     android:text="@string/my_saved_recipes"
                     android:textStyle="bold"
                     android:id="@+id/button_saved_recipes"
@@ -83,6 +87,7 @@
                     android:layout_weight="1"
                     android:layout_margin="15dp"/>
                 <Button
+                    android:background="@drawable/rounded_button"
                     android:text="@string/example_recipes"
                     android:textStyle="bold"
                     android:id="@+id/button_example_recipes"

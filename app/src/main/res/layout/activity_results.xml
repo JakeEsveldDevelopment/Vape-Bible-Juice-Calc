@@ -43,6 +43,7 @@
                 android:layout_height="wrap_content" />
 
             <Button
+                android:background="@drawable/rounded_button"
                 android:text="Edit Recipe"
                 android:id="@+id/button_edit_recipe"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -142,6 +143,7 @@
             </LinearLayout>
 
             <Button
+                android:background="@drawable/rounded_button"
                 android:textSize="18sp"
                 android:text="Save Recipe"
                 android:id="@+id/button_save"
