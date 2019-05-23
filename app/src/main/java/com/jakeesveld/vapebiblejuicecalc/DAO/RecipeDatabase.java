@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase;
 
 import com.jakeesveld.vapebiblejuicecalc.Models.DBRecipe;
 
-@Database(entities = {DBRecipe.class}, version = 1)
+@Database(entities = {DBRecipe.class}, version = 2)
 public abstract class RecipeDatabase extends RoomDatabase {
     public abstract RecipeDAO recipeDAO();
 }

@@ -41,7 +41,7 @@ public class StorageDAO {
         }
 
         RecipeDatabase db = Room.databaseBuilder(context,
-                RecipeDatabase.class, DB_NAME).build();
+                RecipeDatabase.class, DB_NAME).fallbackToDestructiveMigration().build();
 
         try {
             db.recipeDAO().addRecipe(new DBRecipe(recipe));
@@ -59,14 +59,14 @@ public class StorageDAO {
             e.printStackTrace();
         }
 
-        RecipeDatabase db = Room.databaseBuilder(context, RecipeDatabase.class, DB_NAME).build();
+        RecipeDatabase db = Room.databaseBuilder(context, RecipeDatabase.class, DB_NAME).fallbackToDestructiveMigration().build();
         db.recipeDAO().deleteRecipe(new DBRecipe(recipe));
     }
 
 
     public static ArrayList<Recipe> checkNetworkWithLocal(ArrayList<Recipe> networkRecipeList, Context context){
         RecipeDatabase db = Room.databaseBuilder(context,
-                RecipeDatabase.class, DB_NAME).build();
+                RecipeDatabase.class, DB_NAME).fallbackToDestructiveMigration().build();
         ArrayList<Recipe> localRecipeList = new ArrayList<>();
         List<DBRecipe> localDBList = db.recipeDAO().getAllbyUserId(user.getUid());
         for(DBRecipe dbRecipe: localDBList){

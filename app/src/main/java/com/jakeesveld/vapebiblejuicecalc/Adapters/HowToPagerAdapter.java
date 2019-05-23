@@ -43,16 +43,19 @@ public class HowToPagerAdapter extends PagerAdapter {
         TextView disclaimerView = itemView.findViewById(R.id.text_disclaimer);
         switch (position){
             case 0:
-                titleView.setText("How to: Use this App");
+                titleView.setText(R.string.how_to_use_app_title);
                 break;
             case 1:
-                titleView.setText("Flavor Mixing Tips");
+                titleView.setText(R.string.flavor_mixing_tips_title);
                 break;
             case 2:
-                titleView.setText("Common Shorthands in the DIY Community");
+                titleView.setText(R.string.common_shorthands_title);
                 break;
             case 3:
-                titleView.setText("That's All for now!");
+                titleView.setText(R.string.understanding_ratios_title);
+                break;
+            case 4:
+                titleView.setText(R.string.thats_all_title);
                 disclaimerView.setVisibility(View.GONE);
                 break;
 

@@ -18,6 +18,7 @@ public class Recipe implements Serializable {
         this.nic = dbRecipe.getNic();
         this.bottleSize = dbRecipe.getBottleSize();
         this.name = dbRecipe.getName();
+        this.profile = dbRecipe.getProfile();
         String flavorNamesString = dbRecipe.getFlavorNames();
         String flavorAmountsString = dbRecipe.getFlavorAmounts();
         this.flavors = new ArrayList<>();
@@ -142,9 +143,5 @@ public class Recipe implements Serializable {
 
     public void setProfile(String profile) {
         this.profile = profile;
-    }
-
-    public void addFlavor(Flavor flavor){
-        this.flavors.add(flavor);
     }
 }

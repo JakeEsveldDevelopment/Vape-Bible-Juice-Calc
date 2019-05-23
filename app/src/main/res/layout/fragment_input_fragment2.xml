@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
-        android:text="Step 2 - Flavors"
+        android:text="@string/step_2_flavors_title"
         android:textAlignment="center"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -57,7 +57,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Add flavor"
+        android:text="@string/add_flavor_button"
         app:layout_constraintBottom_toTopOf="@id/button_results" />
 
     <Button
@@ -66,7 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="Results"
+        android:text="@string/results_button"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 

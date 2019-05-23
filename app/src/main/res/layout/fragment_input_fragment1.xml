@@ -33,7 +33,7 @@
         <TextView
             android:textStyle="bold"
             android:textSize="24sp"
-            android:text="Bottle Size:"
+            android:text="@string/bottle_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -41,7 +41,7 @@
             android:layout_marginTop="10dp"
             android:textStyle="bold"
             android:textSize="24sp"
-            android:text="Desired Strength:"
+            android:text="@string/desired_strength"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -60,7 +60,7 @@
         <EditText
             android:inputType="number"
             android:id="@+id/edit_bottle_size"
-            android:hint="mL"
+            android:hint="@string/ml_hint"
             android:layout_gravity="end"
             android:textAlignment="textEnd"
             android:layout_width="150dp"
@@ -69,7 +69,7 @@
         <EditText
             android:inputType="number"
             android:id="@+id/edit_desired_strength"
-            android:hint="mg/mL"
+            android:hint="@string/mg_ml_hint"
             android:layout_gravity="end"
             android:textAlignment="textEnd"
             android:layout_width="150dp"
@@ -88,14 +88,14 @@
             android:inputType="number"
             android:id="@+id/edit_desired_VG"
             android:textAlignment="center"
-            android:text="50%"
+            android:text="@string/ratio_placeholder"
             android:layout_width="100dp"
             android:layout_height="wrap_content" />
         
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Desired Ratio"
+            android:text="@string/desired_ratio"
             android:textStyle="bold"
             android:textAlignment="center"
             android:layout_weight="1"
@@ -106,7 +106,7 @@
             android:inputType="number"
             android:id="@+id/edit_desired_PG"
             android:textAlignment="center"
-            android:text="50%"
+            android:text="@string/ratio_placeholder"
             android:layout_width="100dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -122,7 +122,7 @@
             android:layout_marginStart="25dp"
             android:textStyle="bold"
             android:textSize="24sp"
-            android:text="VG"
+            android:text="@string/vg"
             android:layout_width="50dp"
             android:layout_height="wrap_content" />
 
@@ -140,7 +140,7 @@
             android:layout_marginEnd="25dp"
             android:textStyle="bold"
             android:textSize="24sp"
-            android:text="PG"
+            android:text="@string/pg"
             android:layout_width="50dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -151,7 +151,7 @@
         android:textAlignment="center"
         android:textStyle="bold"
         android:textSize="32sp"
-        android:text="Nicotine Base"
+        android:text="@string/nicotine_base_title"
         app:layout_constraintTop_toBottomOf="@id/layout_slider_desired_ratio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -168,7 +168,7 @@
             android:layout_marginTop="10dp"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:text="Nicotine Base Strength:"
+            android:text="@string/nicotine_base_strength"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -178,7 +178,7 @@
             android:layout_weight="1"
             android:textAlignment="textEnd"
             android:layout_gravity="end"
-            android:hint="mg/mL"
+            android:hint="@string/mg_ml_hint"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -197,14 +197,14 @@
             android:inputType="number"
             android:id="@+id/edit_base_VG"
             android:textAlignment="center"
-            android:text="50%"
+            android:text="@string/ratio_placeholder"
             android:layout_width="100dp"
             android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Nicotine Base Ratio"
+            android:text="@string/nicotine_base_ratio"
             android:textStyle="bold"
             android:textAlignment="center"
             android:layout_weight="1"
@@ -215,7 +215,7 @@
             android:inputType="number"
             android:id="@+id/edit_base_PG"
             android:textAlignment="center"
-            android:text="50%"
+            android:text="@string/ratio_placeholder"
             android:layout_width="100dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -232,7 +232,7 @@
             android:layout_marginStart="25dp"
             android:textStyle="bold"
             android:textSize="24sp"
-            android:text="VG"
+            android:text="@string/vg"
             android:layout_width="50dp"
             android:layout_height="wrap_content" />
 
@@ -250,7 +250,7 @@
             android:layout_marginEnd="25dp"
             android:textStyle="bold"
             android:textSize="24sp"
-            android:text="PG"
+            android:text="@string/pg"
             android:layout_width="50dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -259,7 +259,7 @@
         android:background="@drawable/rounded_button"
         android:layout_margin="20dp"
         android:id="@+id/button_next_page"
-        android:text="Next Page: Flavors"
+        android:text="@string/next_page_flavors_button"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

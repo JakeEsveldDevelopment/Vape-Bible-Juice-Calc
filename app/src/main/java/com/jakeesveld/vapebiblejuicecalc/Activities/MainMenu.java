@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.room.RoomDatabase;
+
 import com.firebase.ui.auth.AuthUI;
 import com.jakeesveld.vapebiblejuicecalc.DAO.StorageDAO;
 import com.jakeesveld.vapebiblejuicecalc.R;
@@ -21,6 +23,7 @@ public class MainMenu extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         context = this;
+
 
         findViewById(R.id.button_create_new).setOnClickListener(new View.OnClickListener() {
             @Override

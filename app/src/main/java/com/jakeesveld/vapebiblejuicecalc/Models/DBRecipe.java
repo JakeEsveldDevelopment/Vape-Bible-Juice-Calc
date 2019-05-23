@@ -16,12 +16,14 @@ public class DBRecipe {
     private String flavorAmounts;
     private String baseNic;
     private String userId;
+    private String profile;
 
     public DBRecipe(Recipe recipe) {
         this.name = recipe.getName();
         this.PG = recipe.getPG();
         this.VG = recipe.getVG();
         this.nic = recipe.getNic();
+        this.profile = recipe.getProfile();
         this.bottleSize = recipe.getBottleSize();
         StringBuilder builder = new StringBuilder();
         StringBuilder amountBuilder = new StringBuilder();
@@ -119,5 +121,13 @@ public class DBRecipe {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 }
