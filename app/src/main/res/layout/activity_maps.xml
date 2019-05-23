@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@drawable/gradient_background"
+        android:background="@drawable/inverse_gradient_background"
         android:fitsSystemWindows="true"
         app:menu="@menu/nav_drawer_menu" />
 

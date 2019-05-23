@@ -69,7 +69,7 @@
     <com.google.android.material.navigation.NavigationView
         android:fitsSystemWindows="true"
         app:menu="@menu/nav_drawer_menu"
-        android:background="@drawable/gradient_background"
+        android:background="@drawable/inverse_gradient_background"
         android:id="@+id/nav_view"
         android:layout_gravity="start"
         android:layout_width="wrap_content"
