@@ -198,22 +198,22 @@ public class InputFragment1 extends Fragment {
         if(editableRecipe.getNic() != 0) {
             editDesiredStrength.setText(String.valueOf(editableRecipe.getNic()));
         }
-        if (editableRecipe.getPG() != 0) {
+
             editDesiredPG.setText(String.valueOf(editableRecipe.getPG()));
-        }
-        if (editableRecipe.getVG() != 0) {
+
+
             editDesiredVG.setText(String.valueOf(editableRecipe.getVG()));
-        }
+
         if(editableRecipe.getBaseNic() != null) {
             if(editableRecipe.getBaseNic().getStrength() != 0) {
                 editBaseStrength.setText(String.valueOf(editableRecipe.getBaseNic().getStrength()));
             }
-            if (editableRecipe.getBaseNic().getVG() != 0) {
+
                 editBaseVG.setText(String.valueOf(editableRecipe.getBaseNic().getVG()));
-            }
-            if(editableRecipe.getBaseNic().getPG() != 0) {
+
+
                 editBasePG.setText(String.valueOf(editableRecipe.getBaseNic().getPG()));
-            }
+
         }
     }
 
