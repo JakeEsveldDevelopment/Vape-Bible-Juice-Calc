@@ -5,9 +5,10 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.jakeesveld.vapebiblejuicecalc.Adapters.HowToPagerAdapter;
 import com.jakeesveld.vapebiblejuicecalc.R;
 
-public class HowToActivity extends AppCompatActivity {
+public class HowToActivity extends BaseActivity {
 
     ViewPager pager;
 
@@ -16,9 +17,9 @@ public class HowToActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_how_to);
         pager = findViewById(R.id.pager);
-/*        int[] resources = new int[]{R.drawable.carousel_background};
+        int[] resources = new int[]{R.string.how_to_use_this_app, R.string.flavor_mixing_tips};
         HowToPagerAdapter pagerAdapter = new HowToPagerAdapter(this, resources);
-        pager.setAdapter(pagerAdapter);*/
+        pager.setAdapter(pagerAdapter);
     }
 }
 

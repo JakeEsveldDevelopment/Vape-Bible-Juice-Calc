@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.Observer;
@@ -38,12 +40,15 @@ public class SavedRecipesActivity extends BaseActivity implements DeleteRecipeCo
     ArrayList<Recipe> recipeList;
     SavedRecipeAdapter listAdapter;
     SavedRecipesViewModel viewModel;
+    ProgressBar progressBar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_recipes);
+        progressBar = findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.VISIBLE);
         recipeList = new ArrayList<>();
         listAdapter = new SavedRecipeAdapter(recipeList, this);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
@@ -73,6 +78,7 @@ public class SavedRecipesActivity extends BaseActivity implements DeleteRecipeCo
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     Recipe recipe = snapshot.getValue(Recipe.class);
                     networkRecipes.add(recipe);
+                    progressBar.setVisibility(View.GONE);
                 }
                 viewModel.updateData(networkRecipes);
 

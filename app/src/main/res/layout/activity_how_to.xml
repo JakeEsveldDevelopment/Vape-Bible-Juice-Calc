@@ -22,33 +22,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.appbar.AppBarLayout>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:background="@drawable/gradient_background"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Activities.HowToActivity">
 
-    <androidx.viewpager.widget.ViewPager
-        android:layout_marginTop="50dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
-    </androidx.viewpager.widget.ViewPager>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_background"
+            tools:context=".Activities.HowToActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></androidx.viewpager.widget.ViewPager>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-<com.google.android.material.navigation.NavigationView
-android:fitsSystemWindows="true"
-app:menu="@menu/nav_drawer_menu"
-android:id="@+id/nav_view"
-android:layout_gravity="start"
-android:layout_width="wrap_content"
-android:layout_height="match_parent"/>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@drawable/gradient_background"
+        android:fitsSystemWindows="true"
+        app:menu="@menu/nav_drawer_menu" />
 
 
-    </androidx.drawerlayout.widget.DrawerLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

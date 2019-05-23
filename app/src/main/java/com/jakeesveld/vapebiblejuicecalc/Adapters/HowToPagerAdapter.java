@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.jakeesveld.vapebiblejuicecalc.R;
 
@@ -36,8 +37,17 @@ public class HowToPagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         View itemView = layoutInflater.inflate(R.layout.pager_item, container, false);
 
-        ImageView imageView = itemView.findViewById(R.id.image_background);
-        imageView.setImageResource(resources[position]);
+        TextView textView = itemView.findViewById(R.id.text_content);
+        textView.setText(resources[position]);
+        TextView titleView = itemView.findViewById(R.id.text_title);
+        switch (position){
+            case 0:
+                titleView.setText("How to: Use this App");
+                break;
+            case 1:
+                titleView.setText("Flavor Mixing Tips");
+                break;
+        }
 
         container.addView(itemView);
 

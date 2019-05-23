@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,11 +30,14 @@ public class ExampleRecipesActivity extends BaseActivity {
     SavedRecipesViewModel viewModel;
     ArrayList<Recipe> recipeList;
     ExampleRecipeAdapter listAdapter;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_example_recipes);
+        progressBar = findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.VISIBLE);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference(EXAMPLES_KEY);
         recipeList = new ArrayList<>();
@@ -50,7 +55,6 @@ public class ExampleRecipesActivity extends BaseActivity {
                     recipeList.clear();
                     recipeList.addAll(recipes);
                     listAdapter.notifyDataSetChanged();
-
                 }
             }
         });
@@ -61,6 +65,7 @@ public class ExampleRecipesActivity extends BaseActivity {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     Recipe recipe = snapshot.getValue(Recipe.class);
                     networkRecipes.add(recipe);
+                    progressBar.setVisibility(View.GONE);
                 }
                 viewModel.updateData(networkRecipes);
 
