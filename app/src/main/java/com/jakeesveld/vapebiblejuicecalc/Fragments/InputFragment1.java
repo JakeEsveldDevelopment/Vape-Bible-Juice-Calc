@@ -201,15 +201,15 @@ public class InputFragment1 extends Fragment {
         if (editableRecipe.getNic() != 0) {
             editDesiredStrength.setText(String.valueOf(editableRecipe.getNic()));
         }
-        editDesiredPG.setText(String.valueOf(editableRecipe.getPG()));
-        editDesiredVG.setText(String.valueOf(editableRecipe.getVG()));
+        editDesiredPG.setText(String.valueOf(editableRecipe.getPG()) + "%");
+        editDesiredVG.setText(String.valueOf(editableRecipe.getVG()) + "%");
         desiredRatioSeekbar.setProgress(editableRecipe.getVG());
         if (editableRecipe.getBaseNic() != null) {
             if (editableRecipe.getBaseNic().getStrength() != 0) {
                 editBaseStrength.setText(String.valueOf(editableRecipe.getBaseNic().getStrength()));
             }
-            editBaseVG.setText(String.valueOf(editableRecipe.getBaseNic().getVG()));
-            editBasePG.setText(String.valueOf(editableRecipe.getBaseNic().getPG()));
+            editBaseVG.setText(String.valueOf(editableRecipe.getBaseNic().getVG()) + "%");
+            editBasePG.setText(String.valueOf(editableRecipe.getBaseNic().getPG()) + "%");
             baseRatioSeekbar.setProgress(editableRecipe.getBaseNic().getVG());
         }
     }
