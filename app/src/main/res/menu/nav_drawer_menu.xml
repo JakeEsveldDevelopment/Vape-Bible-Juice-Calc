@@ -7,4 +7,5 @@
     <item android:id="@+id/nav_saved_recipes" android:title="@string/my_saved_recipes"/>
     <item android:id="@+id/nav_example_recipes" android:title="@string/example_recipes"/>
     <item android:id="@+id/nav_logout" android:title="@string/log_out"/>
+    <item android:id="@+id/nav_map" android:title="@string/distributor_map"/>
 </menu>

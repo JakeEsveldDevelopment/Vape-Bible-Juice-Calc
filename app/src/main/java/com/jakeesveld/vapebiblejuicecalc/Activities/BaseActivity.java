@@ -85,6 +85,9 @@ public class BaseActivity extends AppCompatActivity {
                                     }
                                 });
                         break;
+                    case R.id.nav_map:
+                        startActivity(new Intent(getBaseContext(), MapsActivity.class));
+                        break;
                 }
                 drawerLayout.closeDrawers();
                 return true;
