@@ -127,6 +127,8 @@ public class InputFragment2 extends Fragment {
 
         EditText flavorName = new EditText(getContext());
         EditText flavorPercentage = new EditText(getContext());
+        flavorName.setElevation(2f);
+        flavorPercentage.setElevation(2f);
         if(flavor == null) {
             flavorName.setHint("Flavor Name");
             flavorPercentage.setHint("%");

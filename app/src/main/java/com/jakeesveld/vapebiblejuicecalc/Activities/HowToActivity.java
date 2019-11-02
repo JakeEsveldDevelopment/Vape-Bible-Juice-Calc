@@ -17,7 +17,7 @@ public class HowToActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_how_to);
         pager = findViewById(R.id.pager);
-        int[] resources = new int[]{R.string.how_to_use_this_app, R.string.flavor_mixing_tips, R.string.common_shorthands, R.string.understanding_ratios, R.string.coming_soon};
+        int[] resources = new int[]{R.string.how_to_use_this_app, R.string.flavor_mixing_tips, R.string.common_shorthands, R.string.understanding_ratios};
         HowToPagerAdapter pagerAdapter = new HowToPagerAdapter(this, resources);
         pager.setAdapter(pagerAdapter);
     }

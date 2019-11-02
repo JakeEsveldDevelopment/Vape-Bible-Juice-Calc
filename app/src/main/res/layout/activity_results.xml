@@ -42,8 +42,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <Button
-                android:background="@drawable/rounded_button"
+            <com.google.android.material.button.MaterialButton
+                android:textAlignment="center"
+                android:gravity="center"
+                android:padding="4dp"
+                android:elevation="4dp"
                 android:text="@string/edit_recipe_button"
                 android:id="@+id/button_edit_recipe"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -53,6 +56,7 @@
                 android:layout_height="0dp" />
 
             <EditText
+                android:elevation="2dp"
                 android:textAlignment="center"
                 android:layout_marginEnd="50dp"
                 android:layout_marginStart="50dp"
@@ -62,6 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <EditText
+                android:elevation="2dp"
                 android:textAlignment="center"
                 android:layout_marginEnd="50dp"
                 android:layout_marginStart="50dp"
@@ -142,8 +147,11 @@
 
             </LinearLayout>
 
-            <Button
-                android:background="@drawable/rounded_button"
+            <com.google.android.material.button.MaterialButton
+                android:elevation="4dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:padding="12dp"
                 android:textSize="18sp"
                 android:text="@string/save_recipe_button"
                 android:id="@+id/button_save"
@@ -163,7 +171,7 @@
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="@drawable/inverse_gradient_background"
+        android:background="@color/colorPrimary"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:menu="@menu/nav_drawer_menu" />

@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="20dp"
     android:layout_margin="10dp"
+    android:elevation="12dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@drawable/inverse_gradient_background"
+        android:background="@color/colorAccent"
         android:id="@+id/parent"
         android:padding="10dp"
         android:layout_width="match_parent"

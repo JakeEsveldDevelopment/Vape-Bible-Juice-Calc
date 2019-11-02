@@ -53,9 +53,6 @@ public class HowToPagerAdapter extends PagerAdapter {
                 break;
             case 3:
                 titleView.setText(R.string.understanding_ratios_title);
-                break;
-            case 4:
-                titleView.setText(R.string.thats_all_title);
                 disclaimerView.setVisibility(View.GONE);
                 break;
 
